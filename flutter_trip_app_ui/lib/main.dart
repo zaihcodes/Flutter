@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      theme: ThemeData(fontFamily: 'Nunito'),
+      home: const HomeScreen(),
     );
   }
 }
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 width: double.infinity,
                 decoration: const BoxDecoration(color: Colors.green),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                           colors: [
@@ -49,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                         'Yosemit Nation Park',
                         style: TextStyle(
                             fontSize: 50,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                             letterSpacing: 1.5),
                       ),
