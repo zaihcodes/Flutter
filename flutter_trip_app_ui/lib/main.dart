@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_trip_app_ui/data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,14 +24,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
+      body: PageView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-          Stack(
+        itemCount: TripData.data.length,
+        itemBuilder: (context, index) {
+          final trip = TripData.data[index];
+          return Stack(
             children: [
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.green),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/${trip.image}'),
+                        fit: BoxFit.cover)),
                 child: Container(
                   padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
@@ -41,15 +47,15 @@ class HomeScreen extends StatelessWidget {
                           ],
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
-                          stops: const [0.2, 1])),
+                          stops: const [0.3, 1])),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text(
-                        'Yosemit Nation Park',
-                        style: TextStyle(
-                            fontSize: 50,
+                      Text(
+                        trip.title,
+                        style: const TextStyle(
+                            fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             letterSpacing: 1.5),
@@ -62,45 +68,13 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(right: 3),
-                                child: const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: 15,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(right: 3),
-                                child: const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: 15,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(right: 3),
-                                child: const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: 15,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(right: 3),
-                                child: const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: 15,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(right: 5),
-                                child: const Icon(
-                                  Icons.star,
-                                  color: Colors.grey,
-                                  size: 15,
-                                ),
+                              tripStar(),
+                              tripStar(),
+                              tripStar(),
+                              tripStar(),
+                              tripStar(),
+                              const SizedBox(
+                                width: 5,
                               ),
                               const Text(
                                 '4.0',
@@ -119,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                         height: 30,
                       ),
                       Text(
-                        'Yosemite National Park is in California’s Sierra Nevada mountains. It’s famed for its giant, ancient sequoia trees, and for Tunnel View, the iconic vista of towering Bridalveil Fall and the granite cliffs of El Capitan and Half Dome.',
+                        trip.description,
                         style: TextStyle(
                             fontSize: 18,
                             height: 1.7,
@@ -138,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 50,
                 right: 30,
                 child: Row(
@@ -147,13 +121,13 @@ class HomeScreen extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                   children: <Widget>[
                     Text(
-                      '0',
-                      style: TextStyle(
+                      trip.index.toString(),
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
-                    Text(
+                    const Text(
                       '/4',
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     )
@@ -161,8 +135,19 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ],
-          )
-        ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget tripStar() {
+    return Container(
+      margin: const EdgeInsets.only(right: 3),
+      child: const Icon(
+        Icons.star,
+        color: Colors.yellow,
+        size: 15,
       ),
     );
   }
