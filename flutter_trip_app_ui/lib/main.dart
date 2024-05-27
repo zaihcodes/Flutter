@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_trip_app_ui/data.dart';
+import 'package:flutter_trip_app_ui/fade_animation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,62 +53,74 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        trip.title,
-                        style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            letterSpacing: 1.5),
+                      FadeAnimation(
+                        delay: 1.5,
+                        child: Text(
+                          trip.title,
+                          style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              letterSpacing: 1.5),
+                        ),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              tripStar(),
-                              tripStar(),
-                              tripStar(),
-                              tripStar(),
-                              tripStar(),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                '4.0',
-                                style: TextStyle(color: Colors.white70),
-                              ),
-                              const Text(
-                                '(2000)',
-                                style: TextStyle(
-                                    color: Colors.white38, fontSize: 12),
-                              )
-                            ],
-                          ),
-                        ],
+                      FadeAnimation(
+                        delay: 2.0,
+                        child: Row(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                tripStar(),
+                                tripStar(),
+                                tripStar(),
+                                tripStar(),
+                                tripStar(),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text(
+                                  '4.0',
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                                const Text(
+                                  '(2000)',
+                                  style: TextStyle(
+                                      color: Colors.white38, fontSize: 12),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
-                      Text(
-                        trip.description,
-                        style: TextStyle(
-                            fontSize: 18,
-                            height: 1.7,
-                            color: Colors.grey.shade500),
+                      FadeAnimation(
+                        delay: 2.5,
+                        child: Text(
+                          trip.description,
+                          style: TextStyle(
+                              fontSize: 18,
+                              height: 1.7,
+                              color: Colors.grey.shade500),
+                        ),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'READ MORE',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ))
+                      FadeAnimation(
+                        delay: 2.7,
+                        child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'READ MORE',
+                              style: TextStyle(color: Colors.grey.shade400),
+                            )),
+                      )
                     ],
                   ),
                 ),
