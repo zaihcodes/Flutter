@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio_app/core/constants.dart';
+import 'package:portfolio_app/screens/settings_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -16,12 +17,22 @@ class ProfileScreen extends StatelessWidget {
           'My Profile',
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        leading: const Icon(
-          Icons.arrow_back_ios,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios,
+          ),
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
             child: const Icon(Icons.settings),
           ),
           const SizedBox(
