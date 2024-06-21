@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:photography_app/core/app_colors.dart';
+import 'package:photography_app/models/user_model.dart';
 
 class RecommendWidget extends StatelessWidget {
-  const RecommendWidget(
-      {super.key,
-      required this.profilePicture,
-      required this.username,
-      required this.location,
-      required this.dateAgo,
-      required this.photos});
+  const RecommendWidget({
+    super.key,
+    required this.user,
+  });
 
-  final String profilePicture;
-  final String username;
-  final String location;
-  final String dateAgo;
-  final List<String> photos;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +24,7 @@ class RecommendWidget extends StatelessWidget {
                   child: SizedBox(
                     height: 55,
                     width: 55,
-                    child: Image.asset(profilePicture),
+                    child: Image.asset(user.profilePicture),
                   ),
                 ),
                 SizedBox(width: 20),
@@ -40,7 +34,7 @@ class RecommendWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        username,
+                        user.name,
                         style: TextStyle(
                           color: AppColors.darkGray,
                           fontSize: 16,
@@ -48,7 +42,7 @@ class RecommendWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        location,
+                        user.collection[0].posts[0].location,
                         style: TextStyle(
                           color: AppColors.grey,
                           // fontSize: 16,
@@ -62,7 +56,7 @@ class RecommendWidget extends StatelessWidget {
                   children: [
                     SizedBox(height: 18),
                     Text(
-                      dateAgo,
+                      user.collection[0].posts[0].dateAgo,
                       style: TextStyle(
                         color: AppColors.grey,
                         // fontSize: 16,
@@ -79,11 +73,11 @@ class RecommendWidget extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                buildPhotoCard(imgPath: photos[0]),
+                buildPhotoCard(imgPath: user.collection[0].posts[0].photos[0]),
                 SizedBox(width: 20),
-                buildPhotoCard(imgPath: photos[1]),
+                buildPhotoCard(imgPath: user.collection[0].posts[0].photos[1]),
                 SizedBox(width: 20),
-                buildPhotoCard(imgPath: photos[2]),
+                buildPhotoCard(imgPath: user.collection[0].posts[0].photos[2]),
               ],
             ),
           )

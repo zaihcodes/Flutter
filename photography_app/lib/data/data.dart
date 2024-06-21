@@ -3,7 +3,7 @@ import 'package:photography_app/models/post_model.dart';
 
 import '../models/user_model.dart';
 
-class Data {
+class UserData {
   static UserModel mohammad = new UserModel(
       name: "Mohammad Rahmani",
       username: "@afgprogrammer",

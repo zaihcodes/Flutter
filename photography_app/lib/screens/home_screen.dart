@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photography_app/core/app_colors.dart';
+import 'package:photography_app/data/data.dart';
 import 'package:photography_app/widgets/recommend_widget.dart';
 import 'package:photography_app/widgets/search_box.dart';
 
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen>
                       labelStyle:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       unselectedLabelStyle: TextStyle(),
-                      tabs: [
+                      tabs: const [
                         Tab(
                           text: 'Recommend',
                         ),
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen>
                         )
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: TabBarView(
                         children: [
@@ -79,39 +80,22 @@ class _HomeScreenState extends State<HomeScreen>
                           SingleChildScrollView(
                             child: Column(
                               children: [
-                                RecommendWidget(
-                                  username: 'ZaihCodes',
-                                  profilePicture: 'assets/users/mohammad.jpg',
-                                  location: 'Marrakech, Moroco',
-                                  dateAgo: '3 min ago',
-                                  photos: [
-                                    'assets/photos/one.jpg',
-                                    'assets/photos/two.jpg',
-                                    'assets/photos/three.jpg',
-                                    'assets/photos/four.jpg',
-                                  ],
-                                ),
-                                SizedBox(height: 30),
-                                RecommendWidget(
-                                  username: 'ZaihCodes',
-                                  profilePicture: 'assets/users/yasir.jpg',
-                                  location: 'Marrakech, Moroco',
-                                  dateAgo: '3 min ago',
-                                  photos: [
-                                    'assets/photos/five.jpg',
-                                    'assets/photos/six.jpg',
-                                    'assets/photos/seven.jpg',
-                                    'assets/photos/eight.jpg',
-                                  ],
-                                ),
+                                RecommendWidget(user: UserData.mohammad),
+                                const SizedBox(height: 30),
+                                RecommendWidget(user: UserData.yasir),
                               ],
                             ),
                           ),
                           // Content for Tab 2
                           SingleChildScrollView(
                             child: Container(
-                              padding: EdgeInsets.all(20),
-                              child: Text('Content for Tab 2'),
+                              padding: const EdgeInsets.all(20),
+                              child: const Center(
+                                child: Text(
+                                  'Likes',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
                             ),
                           ),
                         ],
