@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photography_app/core/app_colors.dart';
 import 'package:photography_app/models/user_model.dart';
+import 'package:photography_app/screens/user_profile_screen.dart';
 
 class RecommendWidget extends StatelessWidget {
   const RecommendWidget({
@@ -16,7 +17,13 @@ class RecommendWidget extends StatelessWidget {
       child: Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UserProfileScreen(user: user)),
+              );
+            },
             child: Row(
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
