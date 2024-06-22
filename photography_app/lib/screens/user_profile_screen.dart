@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:photography_app/core/app_colors.dart';
 import 'package:photography_app/models/collection_model.dart';
 import 'package:photography_app/models/user_model.dart';
+import 'package:photography_app/screens/post_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key, required this.user}) : super(key: key);
@@ -198,6 +199,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
           TabBar(
             controller: _tabController,
             isScrollable: true,
+            tabAlignment: TabAlignment.start,
             indicatorColor: AppColors.orange,
             labelColor: AppColors.black,
             unselectedLabelColor: AppColors.grey,
@@ -237,68 +239,78 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   Widget _buildCollectionCard(CollectionModel collection) {
     return AspectRatio(
       aspectRatio: 1.1,
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset(
-                        collection.thumbnail,
-                        fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PostScreen(
+                    image: collection.thumbnail, post: collection.posts[0])),
+          );
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.asset(
+                          collection.thumbnail,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      left: 0,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                          child: Container(
-                            padding: EdgeInsets.all(25),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  collection.name,
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                            child: Container(
+                              padding: EdgeInsets.all(25),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    collection.name,
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '${collection.posts.length} photos',
-                                  style: TextStyle(
-                                    color: AppColors.white,
+                                  Text(
+                                    '${collection.posts.length} photos',
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 10),
-          _buildTagsList(collection.tags),
-        ],
+            SizedBox(height: 10),
+            _buildTagsList(collection.tags),
+          ],
+        ),
       ),
     );
   }
