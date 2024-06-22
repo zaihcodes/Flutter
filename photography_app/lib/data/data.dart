@@ -5,11 +5,11 @@ import '../models/user_model.dart';
 
 class UserData {
   static UserModel mohammad = new UserModel(
-      name: "Mohammad Rahmani",
-      username: "@afgprogrammer",
+      name: "ZaIhCodes",
+      username: "@zaihcodes",
       followers: 400,
       following: 190,
-      profilePicture: "assets/users/mohammad.jpg",
+      profilePicture: "assets/users/zaihcodes.jpg",
       collection: [
         new CollectionModel(
             name: "Photography",
@@ -58,11 +58,11 @@ class UserData {
       ]);
 
   static UserModel yasir = new UserModel(
-      name: "Yasir Ahmad",
-      username: "@yasirnoori.yn",
+      name: "Mohammad Rahmani",
+      username: "@afgprogrammer",
       followers: 400,
       following: 190,
-      profilePicture: "assets/users/yasir.jpg",
+      profilePicture: "assets/users/mohammad.jpg",
       collection: [
         new CollectionModel(
             name: "Photography",
