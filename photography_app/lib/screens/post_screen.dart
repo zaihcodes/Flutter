@@ -3,37 +3,46 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photography_app/core/app_colors.dart';
 import 'package:photography_app/models/post_model.dart';
 
+import '../models/user_model.dart';
+
 class PostScreen extends StatelessWidget {
   const PostScreen({
     super.key,
     required this.image,
     required this.post,
+    required this.user,
   });
 
   final String image;
   final PostModel post;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: AppColors.lightGrey,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildImageHeader(context, size),
-            const SizedBox(height: 10),
-            Padding(
+      body: Column(
+        children: [
+          _buildImageHeader(context, size),
+          const SizedBox(height: 10),
+          Expanded(
+            child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
                   _buildLocationRow(),
-                  _buildMasonryGrid(),
+                  SizedBox(height: 15),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: _buildMasonryGrid(),
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -42,7 +51,6 @@ class PostScreen extends StatelessWidget {
     return Container(
       height: size.height * 0.5,
       decoration: const BoxDecoration(
-        color: Colors.greenAccent,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(20),
         ),
@@ -50,13 +58,16 @@ class PostScreen extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(20),
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
+            child: Hero(
+              tag: 'tag_$image',
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -90,13 +101,13 @@ class PostScreen extends StatelessWidget {
                   child: Container(
                     height: 50,
                     width: 50,
-                    child: Image.asset('assets/users/zaihcodes.jpg'),
+                    child: Image.asset(user.profilePicture),
                   ),
                 ),
                 const SizedBox(width: 15),
-                const Text(
-                  'ZaihCodes',
-                  style: TextStyle(
+                Text(
+                  user.name,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -116,7 +127,7 @@ class PostScreen extends StatelessWidget {
         Image.asset('assets/icons/location.png', width: 20),
         const SizedBox(width: 10),
         Text(
-          'ZaihCodes',
+          post.location,
           style: TextStyle(
             color: AppColors.grey,
             fontWeight: FontWeight.bold,
@@ -128,21 +139,24 @@ class PostScreen extends StatelessWidget {
   }
 
   Widget _buildMasonryGrid() {
-    return MasonryGridView.count(
+    return StaggeredGrid.count(
       crossAxisCount: 4,
-      itemCount: post.photos.length,
       mainAxisSpacing: 10.0,
       crossAxisSpacing: 10.0,
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (context, index) => Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage(post.photos[index])),
-            color: Colors.green),
-      ),
-      // staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 3 : 2),
+      children: List.generate(post.photos.length, (index) {
+        return StaggeredGridTile.count(
+          crossAxisCellCount: 2,
+          mainAxisCellCount: (index + 1) % 2 + 2,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage(post.photos[index])),
+              color: Colors.green,
+            ),
+          ),
+        );
+      }),
     );
   }
 }

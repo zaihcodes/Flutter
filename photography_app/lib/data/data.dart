@@ -20,6 +20,10 @@ class UserData {
                   location: "Kabul, Afghanistan",
                   dateAgo: "3 min ago",
                   photos: [
+                    'assets/photos/four.jpg',
+                    'assets/photos/five.jpg',
+                    'assets/photos/six.jpg',
+                    'assets/photos/seven.jpg',
                     'assets/photos/one.jpg',
                     'assets/photos/two.jpg',
                     'assets/photos/three.jpg',
@@ -31,6 +35,9 @@ class UserData {
                     'assets/photos/six.jpg',
                     'assets/photos/eight.jpg',
                     'assets/photos/two.jpg',
+                    'assets/photos/one.jpg',
+                    'assets/photos/two.jpg',
+                    'assets/photos/three.jpg',
                   ])
             ]),
         new CollectionModel(

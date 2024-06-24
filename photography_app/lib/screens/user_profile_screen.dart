@@ -245,7 +245,10 @@ class _UserProfileScreenState extends State<UserProfileScreen>
             context,
             MaterialPageRoute(
                 builder: (context) => PostScreen(
-                    image: collection.thumbnail, post: collection.posts[0])),
+                      image: collection.thumbnail,
+                      post: collection.posts[0],
+                      user: widget.user,
+                    )),
           );
         },
         child: Column(
@@ -260,9 +263,12 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: Image.asset(
-                          collection.thumbnail,
-                          fit: BoxFit.cover,
+                        child: Hero(
+                          tag: 'tag_${collection.thumbnail}',
+                          child: Image.asset(
+                            collection.thumbnail,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Positioned(
