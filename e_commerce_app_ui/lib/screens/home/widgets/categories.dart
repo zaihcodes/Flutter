@@ -15,7 +15,7 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
       child: SizedBox(
         height: 30,
         child: ListView.builder(
@@ -35,7 +35,7 @@ class _CategoriesState extends State<Categories> {
         });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -48,7 +48,7 @@ class _CategoriesState extends State<Categories> {
             ),
             AnimatedContainer(
               duration: Duration(milliseconds: 250),
-              margin: EdgeInsets.only(top: kDefaultPaddin / 4), //top padding 5
+              margin: EdgeInsets.only(top: kDefaultPadding / 4), //top padding 5
               height: 2,
               width: selectedIndex == index ? 30 : 0,
               color: selectedIndex == index ? Colors.black : Colors.transparent,
