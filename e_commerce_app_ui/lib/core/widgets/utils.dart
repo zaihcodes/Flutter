@@ -3,12 +3,17 @@ import 'package:flutter_svg/svg.dart';
 
 import '../constants.dart';
 
-AppBar buildAppBar({Color color = Colors.white, Color iconColor = kTextColor}) {
+AppBar buildAppBar(
+    {required BuildContext context,
+    Color color = Colors.white,
+    Color iconColor = kTextColor}) {
   return AppBar(
     backgroundColor: color,
     elevation: 0,
     leading: IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+      },
       icon: SvgPicture.asset(
         "assets/icons/back.svg",
         colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),

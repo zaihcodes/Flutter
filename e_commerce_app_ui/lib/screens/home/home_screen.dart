@@ -2,9 +2,10 @@ import 'package:e_commerce_app_ui/core/constants.dart';
 import 'package:e_commerce_app_ui/data/product_data.dart';
 import 'package:e_commerce_app_ui/screens/home/widgets/categories.dart';
 import 'package:e_commerce_app_ui/screens/home/widgets/product_card.dart';
+import 'package:e_commerce_app_ui/screens/product/product_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
+
+import '../../core/widgets/utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
+      appBar: buildAppBar(context: context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,34 +25,6 @@ class HomeScreen extends StatelessWidget {
           _buildProductGrid(),
         ],
       ),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: IconButton(
-        onPressed: () {},
-        icon: SvgPicture.asset("assets/icons/back.svg"),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            "assets/icons/search.svg",
-            colorFilter: const ColorFilter.mode(kTextColor, BlendMode.srcIn),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            "assets/icons/cart.svg",
-            colorFilter: const ColorFilter.mode(kTextColor, BlendMode.srcIn),
-          ),
-        ),
-        const SizedBox(width: kDefaultPadding / 2),
-      ],
     );
   }
 
@@ -82,7 +55,13 @@ class HomeScreen extends StatelessWidget {
             final product = ProductData.data[index];
             return ProductCard(
               product: product,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductScreen(product: product)),
+                );
+              },
             );
           },
           itemCount: ProductData.data.length,
