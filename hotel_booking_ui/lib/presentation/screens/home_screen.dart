@@ -4,6 +4,7 @@ import 'package:hotel_booking_ui/model/hotel_model.dart';
 import '../../data/hotel_data.dart';
 import '../widgets/home_widgets.dart';
 import '../widgets/hotel_list_view.dart';
+import '../widgets/time_date_ui.dart';
 
 class HotelHomeScreen extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                               return Column(
                                 children: <Widget>[
                                   getSearchBarUI(context: context),
-                                  getTimeDateUI(context: context),
+                                  const TimeDateUi(),
                                 ],
                               );
                             }, childCount: 1),
