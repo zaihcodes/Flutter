@@ -3,6 +3,7 @@ import 'package:hotel_booking_ui/model/hotel_model.dart';
 
 import '../../data/hotel_data.dart';
 import '../widgets/home_widgets.dart';
+import '../widgets/hotel_list_view.dart';
 
 class HotelHomeScreen extends StatefulWidget {
   @override
@@ -80,10 +81,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                           ),
                         ];
                       },
-                      body: Container(
-                        width: double.infinity,
-                        color: Colors.lightGreen,
-                      ),
+                      body: HotelListView(
+                          theme: theme,
+                          hotelList: hotelList,
+                          animationController: animationController),
                     ),
                   )
                 ],
